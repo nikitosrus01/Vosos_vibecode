@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Низшая Школа Экономики | Православный лендинг</title>
+    <style>
+        /* ---------- ПРАВОСЛАВНО-РУССКИЙ СТИЛЬ, БЕЗ НЕОНА ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #faf0df;  /* пергаментный фон */
+            background-image: radial-gradient(circle at 25% 40%, rgba(180, 130, 70, 0.08) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            font-family: 'Old Standard TT', 'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+            color: #2c2b1f;
+            line-height: 1.5;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ЛЕТЯЩИЕ ГУСИ (хохломная анимация) */
+        .geese-flight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .goose {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.25;
+            white-space: nowrap;
+            animation: flyGoose linear infinite;
+            filter: drop-shadow(0 0 2px #b87c4f);
+        }
+        @keyframes flyGoose {
+            0% {
+                transform: translateX(-20%) translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateX(50vw) translateY(-30px) rotate(5deg);
+            }
+            100% {
+                transform: translateX(120vw) translateY(20px) rotate(-3deg);
+            }
+        }
+        /* разные скорости и задержки */
+        .goose:nth-child(1) { top: 15%; left: -10%; animation-duration: 18s; animation-delay: 0s; font-size: 2.2rem; }
+        .goose:nth-child(2) { top: 45%; left: -20%; animation-duration: 22s; animation-delay: 3s; font-size: 1.8rem; }
+        .goose:nth-child(3) { top: 70%; left: -5%; animation-duration: 26s; animation-delay: 1s; font-size: 2.5rem; }
+        .goose:nth-child(4) { top: 85%; left: -30%; animation-duration: 30s; animation-delay: 5s; font-size: 1.9rem; }
+        .goose:nth-child(5) { top: 25%; left: -15%; animation-duration: 20s; animation-delay: 7s; font-size: 2rem; }
+        .goose:nth-child(6) { top: 60%; left: -25%; animation-duration: 24s; animation-delay: 2s; font-size: 2.3rem; }
+
+        /* основной контент поверх гусей */
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(250, 240, 223, 0.85);
+            backdrop-filter: blur(1px);
+            border-radius: 32px;
+            padding: 2rem 2rem 2rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 0 0 1px #e9d5b5;
+        }
+
+        /* РАМКИ И ОРНАМЕНТ (как в старообрядческих книгах) */
+        .ornament-top, .ornament-bottom {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 10px 0;
+            color: #8b5a2b;
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+        }
+        .ornament-top span, .ornament-bottom span {
+            font-family: 'Segoe UI', 'Symbola', serif;
+        }
+
+        /* ЛОГОТИП с двуглавым орлом, калькулятором и бланком */
+        .eagle-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            background: #e9dbc9;
+            border: 2px solid #a67548;
+            border-radius: 80px;
+            padding: 12px 24px;
+            margin-bottom: 20px;
+            box-shadow: inset 0 0 0 2px #fff8e7, 0 5px 12px rgba(0,0,0,0.1);
+        }
+        .eagle-svg {
+            width: 80px;
+            height: 80px;
+        }
+        .eagle-text {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #5a3a22;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: #fff0db;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+        }
+        .eagle-text small {
+            font-size: 0.7rem;
+            display: block;
+            color: #b1622c;
+        }
+
+        /* заголовки вязью */
+        h1, h2 {
+            font-family: 'Cormorant Garamond', 'Old Standard TT', serif;
+            font-weight: 800;
+            text-align: center;
+            color: #3d2a1a;
+            margin: 1rem 0;
+        }
+        h1 {
+            font-size: 2.8rem;
+            text-shadow: 3px 3px 0 #d9c5a7;
+            border-bottom: 2px solid #b8860b;
+            display: inline-block;
+            padding-bottom: 0.25rem;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .podzagol {
+            text-align: center;
+            font-style: italic;
+            color: #7a5a3a;
+            margin-bottom: 2rem;
+        }
+
+        /* ЦИФРЫ (крупно, как в церковной книге) */
+        .digits-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+        .digit-card {
+            background: #fff7ea;
+            border: 3px solid #b8860b;
+            border-radius: 48px;
+            padding: 1.5rem 2rem;
+            min-width: 280px;
+            text-align: center;
+            box-shadow: 8px 8px 0 #c2a070;
+            transition: 0.1s linear;
+        }
+        .digit-number {
+            font-size: 4.2rem;
+            font-weight: 900;
+            color: #2f5e3a;
+            letter-spacing: 4px;
+            font-family: 'Old Standard TT', monospace;
+            cursor: pointer;
+            display: inline-block;
+            padding: 0 8px;
+            border-radius: 20px;
+        }
+        .digit-number:hover {
+            background-color: #ecd9b4;
+        }
+        .digit-label {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            font-weight: bold;
+            color: #8b4513;
+        }
+        .digit-note {
+            font-size: 0.8rem;
+            color: #af7c47;
+            margin-top: 8px;
+        }
+
+        /* ИКОНКА СВЕЧИ/ЛАМПАДЫ */
+        .candle-icon {
+            text-align: center;
+            margin: 20px 0 10px;
+            cursor: help;
+            font-size: 2rem;
+            transition: 0.2s;
+        }
+        .candle-icon span {
+            background: #ffefcf;
+            padding: 8px 20px;
+            border-radius: 60px;
+            display: inline-block;
+            border: 1px solid #dba551;
+        }
+
+        /* КНОПКА-ЛАДАНКА */
+        .prayer-button {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .ladanka {
+            background: #d4b27a;
+            background-image: repeating-linear-gradient(45deg, #c19654 0px, #c19654 2px, #e2c48b 2px, #e2c48b 8px);
+            border: 6px double #5a3a1f;
+            padding: 12px 32px;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #2c2b0e;
+            font-family: 'Cormorant Garamond', serif;
+            cursor: pointer;
+            border-radius: 60px;
+            transition: 0.2s;
+            box-shadow: 4px 6px 0 #6b4c2a;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .ladanka:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 3px 0 #6b4c2a;
+            background: #c9a869;
+        }
+
+        /* КАЛЬКУЛЯТОР СУДЬБЫ */
+        .fate-calc {
+            background: #f3ecd9;
+            border: 2px solid #b8860b;
+            border-radius: 48px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .fate-calc input {
+            background: #fffbf0;
+            border: 2px solid #a57138;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            width: 240px;
+            font-family: monospace;
+            text-align: center;
+            border-radius: 40px;
+            margin: 12px;
+            font-weight: bold;
+        }
+        .fate-calc button {
+            background: #7c5d38;
+            border: none;
+            color: #ffefcf;
+            padding: 10px 24px;
+            font-size: 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: 0.1s;
+        }
+        .fate-calc button:hover {
+            background: #5c401f;
+        }
+        .verdict {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: #e2cfaa;
+            padding: 12px;
+            border-radius: 32px;
+            color: #2c2b1f;
+        }
+
+        /* ФУТЕР */
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            border-top: 1px solid #c6a56b;
+            padding-top: 1rem;
+            color: #6c4f2a;
+            font-style: italic;
+        }
+
+        /* АДАПТИВ */
+        @media (max-width: 760px) {
+            .content { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .digit-number { font-size: 2.4rem; }
+            .digit-card { padding: 0.8rem; min-width: 200px; }
+            .ladanka { font-size: 1.2rem; padding: 8px 18px; }
+            .eagle-svg { width: 60px; height: 60px; }
+        }
+
+        /* прочие православные мелочи */
+        .ornament {
+            font-family: 'Segoe UI', 'Symbola', serif;
+            color: #b67b3c;
+        }
+        .accent {
+            color: #8b4513;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ЛЕТЯЩИЕ ГУСИ (фоновая анимация) -->
+<div class="geese-flight">
+    <div class="goose">🦢 ✝️ 🦢</div>
+    <div class="goose">🕊️ 🦢 🕊️</div>
+    <div class="goose">🦢 🌾 🦢</div>
+    <div class="goose">☦️ 🦢 ☦️</div>
+    <div class="goose">🦢 ✨ 🦢</div>
+    <div class="goose">🍂 🦢 🍂</div>
+</div>
+
+<div class="content">
+    <!-- Верхний орнамент -->
+    <div class="ornament-top">
+        <span>☦️</span> <span>✙</span> <span>☦️</span> <span>✙</span> <span>☦️</span>
+    </div>
+
+    <!-- Логотип: двуглавый орёл с калькулятором и бланком -->
+    <div class="eagle-logo">
+        <div class="eagle-svg">
+            <!-- простой SVG двуглавого орла с атрибутами -->
+            <svg viewBox="0 0 100 100" width="70" height="70" xmlns="http://www.w3.org/2000/svg">
+                <polygon points="50,15 58,35 75,32 63,48 72,65 55,60 50,80 45,60 28,65 37,48 25,32 42,35" fill="#a57138" stroke="#5a3a1f" stroke-width="1.5"/>
+                <circle cx="50" cy="30" r="4" fill="#f7d9a0"/>
+                <circle cx="35" cy="26" r="3.5" fill="#f7d9a0"/>
+                <circle cx="65" cy="26" r="3.5" fill="#f7d9a0"/>
+                <!-- Калькулятор в левой лапе -->
+                <rect x="20" y="68" width="14" height="10" fill="#e0c080" stroke="#4a2e12" stroke-width="0.8" rx="1"/>
+                <text x="22" y="76" font-size="6" fill="#2d2b1a">📊</text>
+                <!-- Бланк ЕГЭ в правой лапе -->
+                <rect x="66" y="68" width="14" height="10" fill="#f9efcf" stroke="#4a2e12" stroke-width="0.8" rx="1"/>
+                <text x="68" y="76" font-size="6" fill="#2d2b1a">📝</text>
+                <path d="M48 42 L52 42 L52 58 L48 58 Z" fill="#d4b27a" stroke="#7a5516" stroke-width="0.8"/>
+            </svg>
+        </div>
+        <div class="eagle-text">
+            НИЗШАЯ ШКОЛА ЭКОНОМИКИ
+            <small>• Православный факультет •</small>
+        </div>
+    </div>
+
+    <h1>Поступай, окаянный!</h1>
+    <div class="podzagol">Страх Божий и ЕГЭ — путь к бюджету</div>
+
+    <!-- БЛОК С ЦИФРАМИ (счётчики) -->
+    <div class="digits-row">
+        <div class="digit-card">
+            <div class="digit-number" id="prav_budgetScore">0</div>
+            <div class="digit-label">📖 Проходной на бюджет (2 предмета)</div>
+            <div class="digit-note">*312 баллов — дар Господень*</div>
+        </div>
+        <div class="digit-card">
+            <div class="digit-number" id="prav_paidScore">0</div>
+            <div class="digit-label">💰 Платное отделение / месяц</div>
+            <div class="digit-note">«Господь помог — карман не помог»</div>
+        </div>
+    </div>
+
+    <!-- СВЕЧА / ЛАМПАДА С ПОДСКАЗКОЙ -->
+    <div class="candle-icon" title="Зажги свечу за высокий балл">
+        <span>🕯️🔥 ЛАМПАДА МОЛИТВЕННАЯ 🔥🕯️</span>
+    </div>
+
+    <!-- КНОПКА-ЛАДАНКА (Подать заявку) -->
+    <div class="prayer-button">
+        <button class="ladanka" id="prav_applyBtn">📜 ПОДАТЬ ЗАЯВКУ 📜</button>
+    </div>
+
+    <!-- КАЛЬКУЛЯТОР СУДЬБЫ -->
+    <div class="fate-calc">
+        <h2>✙ Узнай свою участь ✙</h2>
+        <input type="number" id="prav_userPoints" placeholder="Сумма баллов за 2 предмета" value="280">
+        <button id="prav_fateBtn">Спроси у старца</button>
+        <div id="prav_verdict" class="verdict">Введи баллы и нажми, чадо.</div>
+    </div>
+
+    <!-- ФУТЕР -->
+    <footer>
+        © Низшая Школа Экономики. Господь — генеральный спонсор бюджета.<br>
+        «Смирись, плибей, и плати — или набирай 312+»
+    </footer>
+    <div class="ornament-bottom">
+        <span>✙</span> <span>☦️</span> <span>✙</span> <span>☦️</span> <span>✙</span>
+    </div>
+</div>
+
+<script>
+    // ===================== YOPTA SCRIPT В ПРАВОСЛАВНОМ ОБЛИЧЬЕ ====================
+    // все переменные с префиксом prav_
+    
+    // целевые значения
+    const prav_targetBudget = 312;
+    const prav_targetPaid = 10000000;
+    
+    const prav_budgetElement = document.getElementById('prav_budgetScore');
+    const prav_paidElement = document.getElementById('prav_paidScore');
+    
+    // СЧЁТЧИК: от 0 до цели за 2 секунды
+    function prav_pochetchik() {
+        let prav_currentBudget = 0;
+        let prav_currentPaid = 0;
+        const prav_duration = 2000; // 2 секунды
+        const prav_stepTime = 20;
+        const prav_steps = prav_duration / prav_stepTime;
+        let prav_step = 0;
+        
+        const prav_budgetInc = prav_targetBudget / prav_steps;
+        const prav_paidInc = prav_targetPaid / prav_steps;
+        
+        const prav_timer = setInterval(() => {
+            prav_step++;
+            if (prav_step <= prav_steps) {
+                prav_currentBudget = Math.min(prav_targetBudget, Math.floor(prav_currentBudget + prav_budgetInc));
+                prav_currentPaid = Math.min(prav_targetPaid, Math.floor(prav_currentPaid + prav_paidInc));
+                prav_budgetElement.innerText = prav_currentBudget;
+                prav_paidElement.innerText = prav_currentPaid.toLocaleString('ru-RU');
+            } else {
+                prav_budgetElement.innerText = prav_targetBudget;
+                prav_paidElement.innerText = prav_targetPaid.toLocaleString('ru-RU');
+                clearInterval(prav_timer);
+            }
+        }, prav_stepTime);
+    }
+    
+    // ПАСХАЛКА: клик на цифру 312 -> в консоль
+    const prav_budgetNumberSpan = document.getElementById('prav_budgetScore');
+    if (prav_budgetNumberSpan) {
+        prav_budgetNumberSpan.addEventListener('click', () => {
+            console.log("Аминь! Баллы — не главное, главное — уплатить");
+        });
+    }
+    
+    // КНОПКА "Подать заявку" (алерт с ультиматумом)
+    const prav_applyBtn = document.getElementById('prav_applyBtn');
+    if (prav_applyBtn) {
+        prav_applyBtn.addEventListener('click', () => {
+            alert("Поступай, окаянный! 312 баллов — спасение души и бюджета. А нет — плати 10 лямов и кайся!");
+        });
+    }
+    
+    // КАЛЬКУЛЯТОР: узнай участь
+    const prav_fateBtn = document.getElementById('prav_fateBtn');
+    const prav_userScoreInput = document.getElementById('prav_userPoints');
+    const prav_verdictDiv = document.getElementById('prav_verdict');
+    
+    function prav_determineFate() {
+        let prav_points = parseInt(prav_userScoreInput.value);
+        if (isNaN(prav_points)) prav_points = 0;
+        
+        if (prav_points >= 312) {
+            prav_verdictDiv.innerHTML = "✝️ Радуйся, чадо! Бюджет твой. Стипендии нет, но крест неси с улыбкой ✝️";
+            prav_verdictDiv.style.backgroundColor = "#c8e0b0";
+            prav_verdictDiv.style.color = "#2a471a";
+        } else {
+            prav_verdictDiv.innerHTML = "💸 Готовь 10 миллионов в месяц. Или иди в Низшую Духовную Семинарию 💸";
+            prav_verdictDiv.style.backgroundColor = "#f1d5b5";
+            prav_verdictDiv.style.color = "#932b1d";
+        }
+    }
+    
+    if (prav_fateBtn) {
+        prav_fateBtn.addEventListener('click', prav_determineFate);
+    }
+    
+    // Запуск счётчика после загрузки страницы (имитация загрузки без спиннера)
+    window.addEventListener('DOMContentLoaded', () => {
+        prav_pochetchik();
+    });
+    
+    // ПРАВОСЛАВНЫЙ ДОПОЛНИТЕЛЬНЫЙ ВАЙБ: при наведении на свечу вывод в консоль (тихая молитва)
+    const prav_candle = document.querySelector('.candle-icon');
+    if (prav_candle) {
+        prav_candle.addEventListener('mouseenter', () => {
+            console.log("🕯️ Господи, дай 312 баллов и терпения...");
+        });
+    }
+    
+    // Небольшой эффект: гуси не мешают, просто фон
+    console.log("Низшая Школа Экономики: 'Господь — генеральный спонсор бюджета'");
+</script>
+</body>
+</html>
