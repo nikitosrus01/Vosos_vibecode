@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Решение уравнения с параметром | Математика</title>
+    <!-- MathJax CDN для красивых формул -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f7fa;
+            font-family: 'Segoe UI', 'Roboto', 'Georgia', serif;
+            line-height: 1.55;
+            color: #1e2a3a;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 2rem 2rem 2.5rem;
+        }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            border-left: 6px solid #2c7da0;
+            padding-left: 1.2rem;
+            margin-bottom: 1rem;
+            color: #0b3b4f;
+        }
+        .problem {
+            background: #f0f4f8;
+            padding: 1.2rem 1.8rem;
+            border-radius: 24px;
+            margin: 1.5rem 0;
+            font-size: 1.2rem;
+            border: 1px solid #cfdfed;
+        }
+        .problem p {
+            font-weight: 500;
+        }
+        .step {
+            margin: 1.8rem 0;
+            border-bottom: 1px dashed #cbd5e1;
+            padding-bottom: 1rem;
+        }
+        .step h3 {
+            color: #1e5a6f;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+        .formula {
+            background: #fef9e6;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            margin: 0.8rem 0;
+            overflow-x: auto;
+        }
+        .answer-box {
+            background: #e6f4ea;
+            border-left: 8px solid #2e7d64;
+            padding: 1.2rem 1.8rem;
+            border-radius: 24px;
+            margin: 2rem 0 1rem;
+        }
+        .answer-box h2 {
+            color: #1c5a4a;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .inline-code {
+            background: #eef2f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #bdd4e2, transparent);
+        }
+        .interactive {
+            margin-top: 2.2rem;
+            background: #f9fafb;
+            border-radius: 28px;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+        }
+        .interactive h3 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.4rem;
+            color: #2c5f7a;
+        }
+        .slider-container {
+            margin: 1rem 0;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 12px 0;
+            -webkit-appearance: none;
+            background: #cbdde9;
+            height: 6px;
+            border-radius: 10px;
+        }
+        input[type="range"]:focus {
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #2c7da0;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .value-display {
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            background: #1e2a3a;
+            color: #c3e8f7;
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 32px;
+        }
+        .solution-list {
+            background: #ffffffd9;
+            padding: 0.8rem;
+            border-radius: 20px;
+            margin-top: 1rem;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #5a6e7c;
+        }
+        @media (max-width: 680px) {
+            .container { padding: 1.2rem; }
+            h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📐 Решение уравнения с параметром</h1>
+    <div class="problem">
+        <p>\[ |x-a| + |x+a| = 2a + 3 \]</p>
+        <p>Найти все значения параметра \(a\), при которых уравнение имеет хотя бы одно решение, и выразить решения \(x\) в зависимости от \(a\).</p>
+    </div>
+
+    <!-- ========== ПОШАГОВОЕ РЕШЕНИЕ ========== -->
+    <div class="step">
+        <h3>📌 Шаг 1. Используем свойство суммы модулей</h3>
+        <p>Для любых действительных чисел известно тождество:</p>
+        <div class="formula">
+            \[ |x-a| + |x+a| = 2 \max\{|x|,\,|a|\} \]
+        </div>
+        <p>(сумма расстояний до точек \(-a\) и \(a\) равна удвоенному большему из расстояний до нуля).</p>
+        <p>Подставляем в исходное уравнение:</p>
+        <div class="formula">
+            \[ 2 \max\{|x|,\,|a|\} = 2a + 3 \quad\Rightarrow\quad \max\{|x|,\,|a|\} = a + \frac{3}{2}. \]
+        </div>
+        <p>Правая часть должна быть неотрицательной, так как максимум модулей неотрицателен:</p>
+        <div class="formula">
+            \[ a + \frac{3}{2} \ge 0 \;\Longrightarrow\; a \ge -\frac{3}{2}. \]
+        </div>
+    </div>
+
+    <div class="step">
+        <h3>📌 Шаг 2. Разбор случаев: кто больше — \(|x|\) или \(|a|\)?</h3>
+        <p><strong>Случай А:</strong> \(|a| \ge |x|\). Тогда \(\max\{|x|,|a|\}=|a|\), уравнение становится:</p>
+        <div class="formula">
+            \[ |a| = a + \frac{3}{2}. \]
+        </div>
+        <p>Решаем с учётом знака \(a\):</p>
+        <ul style="margin-left: 1.8rem;">
+            <li>Если \(a \ge 0\), то \(|a|=a\) и получаем \(a = a + 1.5 \;\Rightarrow\; 0=1.5\) — противоречие, решений нет.</li>
+            <li>Если \(a < 0\), то \(|a| = -a\) и \(-a = a + 1.5 \;\Rightarrow\; -2a = 1.5 \;\Rightarrow\; a = -0.75\).</li>
+        </ul>
+        <p>Значение \(a = -0.75\) удовлетворяет условию \(a<0\) и \(a \ge -1.5\). При этом условие \(|a| \ge |x|\) даёт \(|x| \le |a| = 0.75\). Подстановкой в исходное уравнение убеждаемся: для любого \(x\) с \(|x| \le 0.75\) левая часть равна \(2\cdot0.75 = 1.5\), правая \(2(-0.75)+3 = 1.5\).</p>
+        <div class="formula">
+            \[ \text{При } a = -0.75 \text{ решения: } x \in [-0.75;\,0.75] \quad (\text{все } |x| \le 0.75). \]
+        </div>
+    </div>
+
+    <div class="step">
+        <h3>📌 Шаг 3. Случай Б: \(|x| \ge |a|\)</h3>
+        <p>Тогда \(\max\{|x|,|a|\}=|x|\) и уравнение принимает вид:</p>
+        <div class="formula">
+            \[ |x| = a + \frac{3}{2}. \]
+        </div>
+        <p>Поскольку левая часть неотрицательна, условие \(a \ge -1.5\) уже выполнено. Отсюда:</p>
+        <div class="formula">
+            \[ x = \pm\left(a + \frac{3}{2}\right). \]
+        </div>
+        <p>Дополнительное требование \(|x| \ge |a|\) даёт неравенство:</p>
+        <div class="formula">
+            \[ a + \frac{3}{2} \ge |a|. \]
+        </div>
+        <p>Рассмотрим знаки \(a\):</p>
+        <ul style="margin-left: 1.8rem;">
+            <li>При \(a \ge 0\): \(a + 1.5 \ge a\) верно всегда.</li>
+            <li>При \(a < 0\): \(a + 1.5 \ge -a \;\Rightarrow\; 2a + 1.5 \ge 0 \;\Rightarrow\; a \ge -0.75\).</li>
+        </ul>
+        <p>Объединяя с условием \(a \ge -1.5\), получаем для случая Б: \(a > -0.75\) (значение \(a = -0.75\) даёт \(|x|=0\), но тогда \(|x| \ge |a|\) не выполняется, так как \(0 \ge 0.75\) ложно). Итак, при \(a > -0.75\) имеем два решения:</p>
+        <div class="formula">
+            \[ x = a + \frac{3}{2}, \qquad x = -\left(a + \frac{3}{2}\right). \]
+        </div>
+        <p>При этом \(a+1.5 > 0\), поэтому оба корня различны.</p>
+    </div>
+
+    <div class="step">
+        <h3>📌 Шаг 4. Объединение результатов</h3>
+        <p>Проанализируем все \(a\) из области \(a \ge -1.5\):</p>
+        <ul>
+            <li>При \(a < -0.75\) (включая \(a=-1.5\)) нет ни одного решения: случай А даёт только \(a=-0.75\), случай Б требует \(a \ge -0.75\).</li>
+            <li>При \(a = -0.75\): бесконечное множество решений (отрезок).</li>
+            <li>При \(a > -0.75\): два симметричных решения \(x = \pm (a+1.5)\).</li>
+        </ul>
+        <p>Кроме того, при \(a < -1.5\) правая часть \(2a+3\) отрицательна, а левая часть (сумма модулей) неотрицательна → решений нет.</p>
+    </div>
+
+    <!-- ========== ОТВЕТ ========== -->
+    <div class="answer-box">
+        <h2>✍️ Ответ</h2>
+        <p><strong>1. Значения параметра \(a\), при которых уравнение имеет хотя бы одно решение:</strong></p>
+        <p>\[ a \in [-0.75,\; +\infty) \]</p>
+        <p><strong>2. Выражение решений \(x\) в зависимости от \(a\):</strong></p>
+        <ul>
+            <li>Если \(a = -0.75\), то любое \(x\), удовлетворяющее \(|x| \le 0.75\) (то есть \(x \in [-0.75;\,0.75]\)).</li>
+            <li>Если \(a > -0.75\), то ровно два решения: 
+                \[ x_1 = a + \frac{3}{2}, \qquad x_2 = -\left(a + \frac{3}{2}\right). \]
+            </li>
+        </ul>
+        <p><em>При \(a < -0.75\) (и \(a \ge -1.5\) тоже) — решений нет. При \(a < -1.5\) также нет решений.</em></p>
+    </div>
+
+    <!-- ========== ПРОВЕРКА НА ПРИМЕРЕ ========== -->
+    <div class="step">
+        <h3>🔍 Проверка на примере</h3>
+        <p>Возьмём \(a = 0\): уравнение \(|x|+|x| = 2|x| = 3\) → \(|x| = 1.5\) → \(x = \pm 1.5\). Формула даёт \(x = \pm(0+1.5) = \pm 1.5\). ✅</p>
+        <p>Возьмём \(a = 2\): по формуле \(x = \pm 3.5\). Подстановка: \(|3.5-2|+|3.5+2| = 1.5+5.5=7\); правая часть \(2\cdot2+3=7\). ✅</p>
+        <p>Возьмём \(a = -0.75\): отрезок \([-0.75;0.75]\), например \(x=0.5\): \(|0.5+0.75|+|0.5-0.75| = 1.25+0.25=1.5\); правая часть \(2(-0.75)+3=1.5\). ✅</p>
+    </div>
+
+    <!-- ========== ИНТЕРАКТИВНЫЙ КАЛЬКУЛЯТОР (ползунок) ========== -->
+    <div class="interactive">
+        <h3>🧪 Интерактивная проверка</h3>
+        <p>Выберите значение параметра \(a\) (от \(-2\) до \(5\)):</p>
+        <div class="slider-container">
+            <input type="range" id="aSlider" min="-2" max="5" step="0.01" value="0">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px;">
+                <span>Текущее \(a = \)</span>
+                <strong id="aValue" class="value-display">0.00</strong>
+            </div>
+        </div>
+        <div id="solutionDisplay" class="solution-list">
+            <!-- сюда будет выводиться результат -->
+        </div>
+        <p style="font-size: 0.85rem; color: #3f6b7e; margin-top: 12px;">* В соответствии с аналитическим решением.</p>
+    </div>
+
+    <footer>
+        Решение основано на тождестве \(|x-a|+|x+a| = 2\max(|x|,|a|)\). Все шаги проверены.
+    </footer>
+</div>
+
+<script>
+    // Интерактивная часть: ползунок и вывод решений
+    const slider = document.getElementById('aSlider');
+    const aValueSpan = document.getElementById('aValue');
+    const solutionDisplay = document.getElementById('solutionDisplay');
+
+    function updateSolutions() {
+        let a = parseFloat(slider.value);
+        aValueSpan.innerText = a.toFixed(3);
+        
+        // аналитическая логика
+        let resultText = '';
+        if (a < -1.5) {
+            resultText = `⚠️ При a = ${a.toFixed(3)} < -1.5 правая часть отрицательна, левая ≥ 0 → решений нет.`;
+        } 
+        else if (a < -0.75) {
+            resultText = `❌ При a = ${a.toFixed(3)} ( ∈ (-1.5; -0.75) ) уравнение не имеет решений.`;
+        }
+        else if (Math.abs(a + 0.75) < 1e-8) {  // a = -0.75
+            resultText = `✅ a = -0.75 → бесконечное множество решений:<br> <strong>x ∈ [−0.75 ; 0.75]</strong> (любое x с |x| ≤ 0.75).`;
+        }
+        else { // a > -0.75
+            let x1 = a + 1.5;
+            let x2 = -(a + 1.5);
+            resultText = `✅ a = ${a.toFixed(3)} > -0.75 → два решения:<br> 
+                          <strong>x₁ = ${x1.toFixed(5)}</strong> &nbsp;&nbsp; и &nbsp;&nbsp; 
+                          <strong>x₂ = ${x2.toFixed(5)}</strong><br>
+                          (проверка: |x| = ${Math.abs(x1).toFixed(5)} ≥ |a| = ${Math.abs(a).toFixed(5)} — выполнено)`;
+        }
+        
+        solutionDisplay.innerHTML = resultText;
+    }
+
+    slider.addEventListener('input', updateSolutions);
+    updateSolutions();  // начальный вызов
+</script>
+</body>
+</html>
